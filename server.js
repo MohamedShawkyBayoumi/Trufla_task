@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const Departments = require('./models/departments');
 const Products = require('./models/products');
-// const ProductsPromotions = require('./models/products_promotions');
+const ProductsPromotions = require('./models/products_promotions');
 const Promotions = require('./models/promotions');
 
 dotenv.config({ path: './config/config.env' });
