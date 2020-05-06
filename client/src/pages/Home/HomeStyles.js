@@ -54,3 +54,10 @@ export const Button = styled.button`
         background: palevioletred;
     }
 `;
+
+export const Input = styled.input`
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+`;

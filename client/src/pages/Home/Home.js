@@ -8,13 +8,15 @@ import {
     PromotionBox,
     PromotionBoxTitles,
     FiltersWrapper,
-    Button
+    Button,
+    Input
 } from './HomeStyles';
 
 const Home = () => {
 
     const [products, setProducts] = useState([]),
-          [active, setActive] = useState(false);
+          [active, setActive] = useState(false),
+          [searchKeyword, setSearchKeyword] = useState(null);
 
     const getProducts = async () => {
         try {
@@ -52,12 +54,21 @@ const Home = () => {
         }
     }
 
+    let filteredProducts = products.filter(product => {
+        if(searchKeyword == null){
+            return product
+        } else {
+            return product.name.toLowerCase().includes(searchKeyword.toLowerCase())
+        }
+    });
+
     return (
         <HomeWrapper>
             <FiltersWrapper>
                 <Button active={active ? true : false} onClick={promotionFilter}>{active ? 'All Products' : 'Promotion filter'}</Button>
             </FiltersWrapper>
-            {products.length ? products.map(({ _id, name, price, promotions }) => (
+            <Input type='text' name='search' onChange={e => setSearchKeyword(e.target.value)} placeholder='Search by product name...' />
+            {filteredProducts.length ? filteredProducts.map(({ _id, name, price, promotions }) => (
                 <CardWrapper key={_id}>
                     <CardName>{name}</CardName>
                     <CardPrice>Price: {price}</CardPrice>
