@@ -9,31 +9,48 @@ import {
 
 import ProductCard from '../../components/ProductCard/ProductCard';
 
+import InfiniteScroll from '../../components/InfiniteScroll';
+
 const Home = () => {
 
     const [products, setProducts] = useState([]),
           [active, setActive] = useState(false),
+          [isLoading, setIsLoading] = useState(false),
+          [page, setPage] = useState(0),
+          [perPage, setPerPage] = useState(5),
           [searchKeyword, setSearchKeyword] = useState(null);
 
     const getProducts = async () => {
         try {
-            let res = await fetch_all_products();
+            setIsLoading(true);
+            let res = await fetch_all_products(page, perPage);
             console.log(res);
-            setProducts(res);
+            setProducts(
+                page > 0 ? [...products, ...res] : res
+            )
+            setIsLoading(false);
         } catch (error) {
             console.log(error);
+            setIsLoading(false);
         }
     }
 
     useEffect(() => {
         getProducts();
-    }, []);
+    }, [page]);
+
+    const loadMore = () => {
+        console.log('load more');
+        setPage(() => page + 1);
+        console.log('page no from load more', page);
+    }
 
     const promotionFilter = () => {
         console.log('promotionFilter');
         setActive(!active);
         
         if(!active){
+            setPerPage(5);
             let filteredProducts = products.length && products.filter((product) => {
                 let productsActive = product.promotions.length ? product.promotions.filter(p => p.active) : []
                 return productsActive.length &&  {
@@ -47,6 +64,8 @@ const Home = () => {
     
             setProducts(filteredProducts)
         } else {
+            setPerPage(5);
+            setPage(0);
             getProducts();
         }
     }
@@ -65,11 +84,20 @@ const Home = () => {
                 <Button active={active ? true : false} onClick={promotionFilter}>{active ? 'All Products' : 'Promotion filter'}</Button>
             </FiltersWrapper>
             <Input type='text' name='search' onChange={e => setSearchKeyword(e.target.value)} placeholder='Search by product name...' />
-            {filteredProducts.length ? filteredProducts.map((product) => (
-                <ProductCard {...product} key={product._id} />
-            )) : (
-                <p>There is no products</p>
-            )}
+
+            <InfiniteScroll
+                list={filteredProducts}
+                isLoading={isLoading}
+                loadMore={loadMore}
+                page={page}
+            >
+
+                {filteredProducts.length ? filteredProducts.map((product) => (
+                    <ProductCard {...product} key={product._id} />
+                )) : (
+                    <p>There is no products</p>
+                )}
+            </InfiniteScroll>
         </HomeWrapper>
     )
 }

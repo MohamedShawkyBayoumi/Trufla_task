@@ -58,13 +58,15 @@ app.post('/products', async (req, res) => {
 });
 
 app.get('/products', async (req, res) => {
-    const match = {};
+    let perPage = Number(req.query.perPage),
+        page = Math.max(0, req.query.page),
+        match = {};
     if(req.query.department_id){
         match.department_id = req.query.department_id
     }
 
     try {
-        let products = await Products.find(match).sort('department_id')
+        let products = await Products.find(match).limit(perPage).skip(perPage * page).sort('department_id')
         .populate('department_id')
         .populate('promotions')
         .exec()

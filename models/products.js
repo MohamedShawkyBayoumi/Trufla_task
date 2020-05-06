@@ -22,17 +22,4 @@ const ProductsSchema = new mongoose.Schema({
     }]
 })
 
-ProductsSchema.virtual('products', {
-    ref: 'Departments',
-    localField: 'department_id',
-    foreignField: '_id',
-});
-
-// ProductsSchema.virtual('promotions', {
-//     ref: 'Promotions',
-//     localField: 'promotion_id',
-//     foreignField: '_id',
-// });
-
-
 module.exports = mongoose.model('Products', ProductsSchema);
