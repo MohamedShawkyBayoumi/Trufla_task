@@ -14,10 +14,4 @@ const DepartmentsSchema = new mongoose.Schema({
     ]
 })
 
-// DepartmentsSchema.virtual('products', {
-//     ref: 'Products',
-//     localField: '_id',
-//     foreignField: 'department_id',
-// });
-
 module.exports = mongoose.model('Departments', DepartmentsSchema);

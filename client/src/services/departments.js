@@ -8,10 +8,10 @@ export function fetch_departments() {
   });
 }
 
-export function fetch_single_department(department_id) {
+export function fetch_single_department_products(department_id) {
   
   return request({
-    url: `/department/${department_id}`,
+    url: `/products?department_id=${department_id}`,
     method: 'GET',
   });
 }

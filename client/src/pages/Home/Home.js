@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { fetch_all_products } from '../../services';
 import {
-    CardWrapper,
-    CardName,
-    CardPrice,
     HomeWrapper,
-    PromotionBox,
-    PromotionBoxTitles,
     FiltersWrapper,
     Button,
     Input
 } from './HomeStyles';
+
+import ProductCard from '../../components/ProductCard/ProductCard';
 
 const Home = () => {
 
@@ -68,20 +65,8 @@ const Home = () => {
                 <Button active={active ? true : false} onClick={promotionFilter}>{active ? 'All Products' : 'Promotion filter'}</Button>
             </FiltersWrapper>
             <Input type='text' name='search' onChange={e => setSearchKeyword(e.target.value)} placeholder='Search by product name...' />
-            {filteredProducts.length ? filteredProducts.map(({ _id, name, price, promotions }) => (
-                <CardWrapper key={_id}>
-                    <CardName>{name}</CardName>
-                    <CardPrice>Price: {price}</CardPrice>
-                    {promotions && promotions.length ? promotions.map(({ p_id, active, code, discount, discounted_price }) => {
-                        return active ? (
-                            <PromotionBox key={p_id}>
-                                <PromotionBoxTitles>Code: {code}</PromotionBoxTitles>
-                                <PromotionBoxTitles>Discount: {discount}</PromotionBoxTitles>
-                                <PromotionBoxTitles>Discounted Price: {discounted_price}</PromotionBoxTitles>
-                            </PromotionBox>
-                        ) : null
-                    }) : null}
-                </CardWrapper>
+            {filteredProducts.length ? filteredProducts.map((product) => (
+                <ProductCard {...product} key={product._id} />
             )) : (
                 <p>There is no products</p>
             )}

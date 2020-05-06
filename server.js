@@ -45,18 +45,6 @@ app.get('/departments', async (req, res) => {
     }
 });
 
-// GET SINGLE DEPARTMENT
-app.get('/department/:department_id', async (req, res) => {
-    try {
-        const department = await Departments.findById(req.params.department_id);
-        // await department.populate('products').execPopulate();
-        console.log(department);
-        res.send(department);
-    } catch (error) {
-        res.status(400).send(error);
-    }
-});
-
 /* Products Routes */
 
 app.post('/products', async (req, res) => {
@@ -70,8 +58,13 @@ app.post('/products', async (req, res) => {
 });
 
 app.get('/products', async (req, res) => {
+    const match = {};
+    if(req.query.department_id){
+        match.department_id = req.query.department_id
+    }
+
     try {
-        let products = await Products.find({}).sort('department_id')
+        let products = await Products.find(match).sort('department_id')
         .populate('department_id')
         .populate('promotions')
         .exec()
@@ -89,7 +82,8 @@ app.get('/products', async (req, res) => {
                 name: product.name,
                 price: product.price,
                 promotions: promotions.filter( promotion => promotion.active),
-                department_name: product.department_id.name
+                department_name: product.department_id.name,
+                department_id: product.department_id._id
             }
         })
 

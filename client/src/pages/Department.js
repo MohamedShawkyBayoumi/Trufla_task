@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { fetch_single_department } from '../services';
+import { fetch_single_department_products } from '../services';
+import ProductCard from '../components/ProductCard/ProductCard';
+import { HomeWrapper } from '../pages/Home/HomeStyles';
 
 const Department = ({ match: { params: { department_id } } }) => {
 
-    const [department, setDepartment] = useState(null);
+    const [products, setProducts] = useState([]);
 
     useEffect(() => {
         (async () => {
             try {
-                let res = await fetch_single_department(department_id);
+                let res = await fetch_single_department_products(department_id);
                 console.log(res);
-                setDepartment(res);
+                setProducts(res);
             } catch (error) {
                 console.log(error);
             }
@@ -18,15 +20,13 @@ const Department = ({ match: { params: { department_id } } }) => {
     }, [department_id]);
 
     return (
-        <div>
-            {department ? (
-                <div>
-                    <h1>{department.name}</h1>
-                </div>
-            ) : (
+        <HomeWrapper>
+            {products.length ? products.map((product) => (
+                <ProductCard {...product} key={product._id} />
+            )) : (
                 <p>There is no products</p>
             )}
-        </div>
+        </HomeWrapper>
     )
 }
 
