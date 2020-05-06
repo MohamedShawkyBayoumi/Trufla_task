@@ -14,6 +14,13 @@ const app = express();
 
 app.use(express.json());
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods', 'DELETE, PUT, GET, POST');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 /* Departments Routes */
 
 // POST A DEPARTMENT
@@ -28,7 +35,7 @@ app.post('/departments', async (req, res) => {
 });
 
 // GET ALL DEPARTMENTS
-app.get('/department', async (req, res) => {
+app.get('/departments', async (req, res) => {
     try {
         const department = await Departments.find({});
         console.log(department);
@@ -71,6 +78,7 @@ app.get('/products', async (req, res) => {
 
         let finalProducts = products.map( product => {
             let promotions = product.promotions.map(promotion => ({
+                p_id: promotion._id,
                 code: promotion.code,
                 active: promotion.active,
                 discount: promotion.discount,
