@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const Products = mongoose.model('Products', {
+const ProductsSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -14,7 +14,25 @@ const Products = mongoose.model('Products', {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Departments'
-    }
+    },
+    promotions: [{
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Promotions'
+    }]
 })
 
-module.exports = Products;
+ProductsSchema.virtual('products', {
+    ref: 'Departments',
+    localField: 'department_id',
+    foreignField: '_id',
+});
+
+// ProductsSchema.virtual('promotions', {
+//     ref: 'Promotions',
+//     localField: 'promotion_id',
+//     foreignField: '_id',
+// });
+
+
+module.exports = mongoose.model('Products', ProductsSchema);

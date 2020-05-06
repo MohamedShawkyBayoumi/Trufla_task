@@ -10,7 +10,7 @@ const Promotions = mongoose.model('Promotions', {
         required: true
     },
     discount: {
-        type: Boolean,
+        type: Number,
         required: true
     }
 })
