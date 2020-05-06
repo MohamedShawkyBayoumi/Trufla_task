@@ -32,7 +32,7 @@ const Header = () => {
                     ))}
                 </UL>
             ) : (
-                <p>There is no departments</p>
+                <p style={{ textAlign: 'center' }}>There is no departments</p>
             )}
         </Wrapper>
     )
