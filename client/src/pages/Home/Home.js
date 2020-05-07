@@ -26,11 +26,13 @@ const Home = () => {
             setIsLoading(true);
             let res = await fetch_all_products(page, perPage);
             console.log(res);
-            setProducts(
-                page > 0 ? [...products, ...res] : res
-            )
+            if(!active){
+                setProducts(
+                    page > 0 ? [...products, ...res] : res
+                )
+                res.length > 0 ? setShowLoadingBtn(false) : setShowLoadingBtn(true);
+            }
 
-            res.length > 0 ? setShowLoadingBtn(false) : setShowLoadingBtn(true);
 
             setIsLoading(false);
         } catch (error) {
@@ -55,6 +57,8 @@ const Home = () => {
         
         if(!active){
             setPerPage(5);
+            setShowLoadingBtn(true);
+            
             let filteredProducts = products.length && products.filter((product) => {
                 let productsActive = product.promotions.length ? product.promotions.filter(p => p.active) : []
                 return productsActive.length &&  {
@@ -70,6 +74,7 @@ const Home = () => {
         } else {
             setPerPage(5);
             setPage(0);
+            setShowLoadingBtn(false);
             getProducts();
         }
     }

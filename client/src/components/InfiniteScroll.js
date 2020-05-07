@@ -15,7 +15,7 @@ const InfiniteScroll = ({ children, isLoading, list, loadMore, page, showLoading
 
   const onScroll = () => {
     let check = (loadingPoint.current.getBoundingClientRect().bottom - window.innerHeight <= 0) ? true : false;
-    if (check) {
+    if (check && !showLoadingBtn) {
       setTimeout(() => loadMore(), 500)
     }
   };
