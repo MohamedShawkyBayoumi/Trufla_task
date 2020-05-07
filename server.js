@@ -3,8 +3,8 @@ const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const Departments = require('./models/departments');
 const Products = require('./models/products');
-const ProductsPromotions = require('./models/products_promotions');
 const Promotions = require('./models/promotions');
+const shuffle = require('./utils/utils');
 
 dotenv.config({ path: './config/config.env' });
 
@@ -90,7 +90,7 @@ app.get('/products', async (req, res) => {
         })
 
         console.log(finalProducts);
-        res.send(finalProducts)
+        res.send(shuffle(finalProducts))
     } catch (error) {
         res.status(500).send(error)
     }

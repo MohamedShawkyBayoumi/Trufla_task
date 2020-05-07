@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
+import { Button } from '../pages/Home/HomeStyles';
 
-const InfiniteScroll = ({ children, isLoading, list, loadMore, page }) => {
+const InfiniteScroll = ({ children, isLoading, list, loadMore, page, showLoadingBtn }) => {
 
   const loadingPoint = useRef(null);
 
@@ -15,20 +16,17 @@ const InfiniteScroll = ({ children, isLoading, list, loadMore, page }) => {
   const onScroll = () => {
     let check = (loadingPoint.current.getBoundingClientRect().bottom - window.innerHeight <= 0) ? true : false;
     if (check) {
-      loadMore();
+      setTimeout(() => loadMore(), 500)
     }
   };
 
   return (
     <React.Fragment>
       {children}
-      {/* {isLoading && (
-        <div className="infinite-loader-container">
-          {`Loading....`}
-        </div>
-      )} */}
       <div ref={loadingPoint}></div>
-      <button onClick={() => loadMore()}>Loading</button>
+      {!showLoadingBtn && (
+        <Button onClick={() => loadMore()}>Loading</Button>
+      )}
     </React.Fragment>
   )
 }

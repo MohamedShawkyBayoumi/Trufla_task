@@ -16,6 +16,7 @@ const Home = () => {
     const [products, setProducts] = useState([]),
           [active, setActive] = useState(false),
           [isLoading, setIsLoading] = useState(false),
+          [showLoadingBtn, setShowLoadingBtn] = useState(false),
           [page, setPage] = useState(0),
           [perPage, setPerPage] = useState(5),
           [searchKeyword, setSearchKeyword] = useState(null);
@@ -28,6 +29,9 @@ const Home = () => {
             setProducts(
                 page > 0 ? [...products, ...res] : res
             )
+
+            res.length > 0 ? setShowLoadingBtn(false) : setShowLoadingBtn(true);
+
             setIsLoading(false);
         } catch (error) {
             console.log(error);
@@ -90,6 +94,7 @@ const Home = () => {
                 isLoading={isLoading}
                 loadMore={loadMore}
                 page={page}
+                showLoadingBtn={showLoadingBtn}
             >
 
                 {filteredProducts.length ? filteredProducts.map((product) => (
