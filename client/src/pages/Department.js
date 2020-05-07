@@ -11,7 +11,6 @@ const Department = ({ match: { params: { department_id } } }) => {
         (async () => {
             try {
                 let res = await fetch_single_department_products(department_id);
-                console.log(res);
                 setProducts(res);
             } catch (error) {
                 console.log(error);

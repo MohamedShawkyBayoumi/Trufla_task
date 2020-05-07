@@ -8,7 +8,6 @@ import {
 } from './HomeStyles';
 
 import ProductCard from '../../components/ProductCard/ProductCard';
-
 import InfiniteScroll from '../../components/InfiniteScroll';
 
 const Home = () => {
@@ -25,7 +24,6 @@ const Home = () => {
         try {
             setIsLoading(true);
             let res = await fetch_all_products(page, perPage);
-            console.log(res);
             if(!active){
                 setProducts(
                     page > 0 ? [...products, ...res] : res
@@ -33,10 +31,8 @@ const Home = () => {
                 res.length > 0 ? setShowLoadingBtn(false) : setShowLoadingBtn(true);
             }
 
-
             setIsLoading(false);
         } catch (error) {
-            console.log(error);
             setIsLoading(false);
         }
     }
@@ -46,13 +42,10 @@ const Home = () => {
     }, [page]);
 
     const loadMore = () => {
-        console.log('load more');
         setPage(() => page + 1);
-        console.log('page no from load more', page);
     }
 
     const promotionFilter = () => {
-        console.log('promotionFilter');
         setActive(!active);
         
         if(!active){
@@ -95,8 +88,6 @@ const Home = () => {
             <Input type='text' name='search' onChange={e => setSearchKeyword(e.target.value)} placeholder='Search by product name...' />
 
             <InfiniteScroll
-                list={filteredProducts}
-                isLoading={isLoading}
                 loadMore={loadMore}
                 page={page}
                 showLoadingBtn={showLoadingBtn}

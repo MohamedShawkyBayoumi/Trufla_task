@@ -1,15 +1,15 @@
 import React, { useEffect, useRef } from "react";
 import { Button } from '../pages/Home/HomeStyles';
 
-const InfiniteScroll = ({ children, isLoading, list, loadMore, page, showLoadingBtn }) => {
+const InfiniteScroll = ({ children, loadMore, page, showLoadingBtn }) => {
 
   const loadingPoint = useRef(null);
 
   useEffect(() => {
-    window.addEventListener("scroll", onScroll, false);
+    window.addEventListener("scroll", onScroll);
 
     return () => {
-      window.removeEventListener("scroll", onScroll, false);
+      window.removeEventListener("scroll", onScroll);
     }
   }, [page]);
 

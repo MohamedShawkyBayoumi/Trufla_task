@@ -38,7 +38,6 @@ app.post('/departments', async (req, res) => {
 app.get('/departments', async (req, res) => {
     try {
         const department = await Departments.find({});
-        console.log(department);
         res.send(department);
     } catch (error) {
         res.status(400).send(error);
@@ -89,7 +88,6 @@ app.get('/products', async (req, res) => {
             }
         })
 
-        console.log(finalProducts);
         res.send(shuffle(finalProducts))
     } catch (error) {
         res.status(500).send(error)
@@ -100,7 +98,6 @@ app.get('/products/:department_id', async (req, res) => {
     try {
         let products = await Products.findById(req.params.department_id);
         await products.populate('department_id').execPopulate();
-        console.log(products);
         res.send(products);
     } catch (error) {
         res.send(error);
@@ -111,7 +108,6 @@ app.post('/promotions', async (req, res) => {
     try {
         let promotion = new Promotions(req.body);
         let response = await promotion.save();
-        console.log(response);
         res.send(response);
     } catch (error) {
         res.status(500).send(error)

@@ -10,7 +10,6 @@ const Header = () => {
         (async () => {
             try {
                 let res = await fetch_departments();
-                console.log(res);
                 setDepartments(res);
             } catch (error) {
                 console.log(error);
