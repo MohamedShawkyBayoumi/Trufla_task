@@ -94,15 +94,7 @@ app.get('/products', async (req, res) => {
     }
 })
 
-app.get('/products/:department_id', async (req, res) => {
-    try {
-        let products = await Products.findById(req.params.department_id);
-        await products.populate('department_id').execPopulate();
-        res.send(products);
-    } catch (error) {
-        res.send(error);
-    }
-});
+/* Promotion Routes */
 
 app.post('/promotions', async (req, res) => {
     try {
