@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Button } from '../pages/Home/HomeStyles';
 
-const InfiniteScroll = ({ children, loadMore, page, showLoadingBtn }) => {
+const InfiniteScroll = ({ children, loadMore, page, showLoadingBtn, isLoading }) => {
 
   const loadingPoint = useRef(null);
 
@@ -15,7 +15,7 @@ const InfiniteScroll = ({ children, loadMore, page, showLoadingBtn }) => {
 
   const onScroll = () => {
     let check = (loadingPoint.current.getBoundingClientRect().bottom - window.innerHeight <= 0) ? true : false;
-    if (check && !showLoadingBtn) {
+    if (check && !showLoadingBtn && !isLoading) {
       setTimeout(() => loadMore(), 500)
     }
   };

@@ -95,6 +95,7 @@ const Home = () => {
                 loadMore={loadMore}
                 page={page}
                 showLoadingBtn={showLoadingBtn}
+                isLoading={isLoading}
             >
 
                 {filteredProducts.length ? filteredProducts.map((product) => (
