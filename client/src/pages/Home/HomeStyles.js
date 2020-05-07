@@ -28,8 +28,3 @@ export const Input = styled.input`
     border: 1px solid #ccc;
     font-size: 16px;
 `;
-
-
-export const FiltersWrapper = styled.div`
-
-`;

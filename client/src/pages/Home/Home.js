@@ -2,16 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { fetch_all_products } from '../../services';
 import {
     HomeWrapper,
-    FiltersWrapper,
     Button,
     Input
 } from './HomeStyles';
 
 import ProductCard from '../../components/ProductCard/ProductCard';
 import InfiniteScroll from '../../components/InfiniteScroll';
-
-import axios from 'axios';
-
 
 const Home = () => {
 
@@ -92,9 +88,7 @@ const Home = () => {
 
     return (
         <HomeWrapper>
-            <FiltersWrapper>
-                <Button active={active ? true : false} onClick={promotionFilter}>{active ? 'All Products' : 'Promotion filter'}</Button>
-            </FiltersWrapper>
+            <Button active={active ? true : false} onClick={promotionFilter}>{active ? 'All Products' : 'Promotion filter'}</Button>
             <Input type='text' name='search' onChange={e => setSearchKeyword(e.target.value)} placeholder='Search by product name...' />
 
             <InfiniteScroll
