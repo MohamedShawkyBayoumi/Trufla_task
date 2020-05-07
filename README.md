@@ -2,7 +2,7 @@ This project was bootstrapped with React, React Hooks, React-router-dom, Styled-
 
 ## Installing Dependencies
 
-In the project main directory
+In the project root directory
 
 ### `yarn install`
 
