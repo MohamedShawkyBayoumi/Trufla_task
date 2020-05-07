@@ -27,13 +27,13 @@ In the project root directory, if you want to run just the client, you can run:
 
 ## The Frontend
 
-_You will find 3 Departments links for Department filter, if you select any Department link it will display all of the products within that department.<br />
+* You will find 3 Departments links for Department filter, if you select any Department link it will display all of the products within that department.<br />
 
-_You will find a Switch toggle button for Promotion filter to filter products that have the entered promotion_code or to see All products if you switch the button again.<br />
+* You will find a Switch toggle button for Promotion filter to filter products that have the entered promotion_code or to see All products if you switch the button again.<br />
 
-_You will find a search input field to filter by text search based on product name.<br />
+* You will find a search input field to filter by text search based on product name.<br />
 
-_You will find a paginated list of all products showing their name and price, and showing a products current promotion and discounted price if one is active, and if you want to load more products you have to scroll down or click Loading button
+* You will find a paginated list of all products showing their name and price, and showing a products current promotion and discounted price if one is active, and if you want to load more products you have to scroll down or click Loading button
 
 ## The Backend
 
