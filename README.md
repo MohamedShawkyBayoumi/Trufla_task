@@ -20,20 +20,20 @@ In the project root directory, if you want to run just the server, you can run:
 
 ### `npm run server`
 
-In the client directory, if you want to run just the client, you can run:
+In the project root directory, if you want to run just the client, you can run:
 
 ### `npm run client`
 
 
 ## The Frontend
 
-You will find 3 Departments links for Department filter, if you select any Department link it will display all of the products within that department.<br />
+-You will find 3 Departments links for Department filter, if you select any Department link it will display all of the products within that department.<br />
 
-You will find a Switch toggle button for Promotion filter to filter products that have the entered promotion_code or to see All products if you switch the button again.<br />
+-You will find a Switch toggle button for Promotion filter to filter products that have the entered promotion_code or to see All products if you switch the button again.<br />
 
-You will find a search input field to filter by text search based on product name.<br />
+-You will find a search input field to filter by text search based on product name.<br />
 
-You will find a paginated list of all products showing their name and price, and showing a products current promotion and discounted price if one is active, and if you want to load more products you have to scroll down or click Loading button
+-You will find a paginated list of all products showing their name and price, and showing a products current promotion and discounted price if one is active, and if you want to load more products you have to scroll down or click Loading button
 
 ## The Backend
 
@@ -43,8 +43,14 @@ You will find a paginated list of all products showing their name and price, and
 
 ### API Endpoints
 
+**`GET`** `/departments`
+To see all avilable Deparments<br />
+
+**`GET`** `/products?page=${page}&perPage=${perPage}&department_id=${department_id}`
+To see all Products depends on queries<br />
+
 **`POST`** `/departments`
-Add a Deparment<br />
+Add a Deparment<br /><br />
 sample:<br />
 
 ```
@@ -53,12 +59,8 @@ sample:<br />
 }
 ```
 
-**`GET`** `/departments`
-To see all avilable Deparments<br />
-
-
 **`POST`** `/products`
-Add a Product<br />
+Add a Product<br /><br />
 sample:<br />
 
 ```
@@ -71,12 +73,8 @@ sample:<br />
 ```
 `promotions` is optional
 
-**`GET`** `/products?page=${page}&perPage=${perPage}&department_id=${department_id}`
-To see all Products depends on queries<br />
-
-
 **`POST`** `/promotions`
-Add a Promotion<br />
+Add a Promotion<br /><br />
 sample:<br />
 
 ```
