@@ -3,7 +3,6 @@ import { fetch_departments } from '../services';
 import { Wrapper, UL, LI, NavLink } from './HeaderStyles';
 
 const Header = () => {
-
     const [departments, setDepartments] = useState([]);
 
     useEffect(() => {

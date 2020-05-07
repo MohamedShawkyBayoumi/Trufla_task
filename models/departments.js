@@ -6,12 +6,10 @@ const DepartmentsSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    products: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Products'
-        }
-    ]
+    products: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Products'
+    }]
 })
 
 module.exports = mongoose.model('Departments', DepartmentsSchema);

@@ -6,16 +6,25 @@ import { HomeWrapper } from '../pages/Home/HomeStyles';
 const Department = ({ match: { params: { department_id } } }) => {
 
     const [products, setProducts] = useState([]);
+    let isCancelled = false;
+
+    const getSingleDept = async () => {
+        try {
+            let res = await fetch_single_department_products(department_id);
+            if(!isCancelled){
+                setProducts(res);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     useEffect(() => {
-        (async () => {
-            try {
-                let res = await fetch_single_department_products(department_id);
-                setProducts(res);
-            } catch (error) {
-                console.log(error);
-            }
-        })();
+        getSingleDept();
+
+        return () => {
+            isCancelled = true;
+        }
     }, [department_id]);
 
     return (

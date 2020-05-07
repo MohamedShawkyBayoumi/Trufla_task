@@ -10,6 +10,9 @@ import {
 import ProductCard from '../../components/ProductCard/ProductCard';
 import InfiniteScroll from '../../components/InfiniteScroll';
 
+import axios from 'axios';
+
+
 const Home = () => {
 
     const [products, setProducts] = useState([]),
@@ -19,26 +22,33 @@ const Home = () => {
           [page, setPage] = useState(0),
           [perPage, setPerPage] = useState(5),
           [searchKeyword, setSearchKeyword] = useState(null);
+    let isCancelled = false;
 
     const getProducts = async () => {
         try {
             setIsLoading(true);
             let res = await fetch_all_products(page, perPage);
-            if(!active){
+            if(!active && !isCancelled){
                 setProducts(
                     page > 0 ? [...products, ...res] : res
                 )
                 res.length > 0 ? setShowLoadingBtn(false) : setShowLoadingBtn(true);
+                setIsLoading(false);
             }
 
-            setIsLoading(false);
         } catch (error) {
-            setIsLoading(false);
+            if(!isCancelled){
+                setIsLoading(false);
+            }
         }
     }
 
     useEffect(() => {
         getProducts();
+
+        return () => {
+            isCancelled = true;
+        }
     }, [page]);
 
     const loadMore = () => {
