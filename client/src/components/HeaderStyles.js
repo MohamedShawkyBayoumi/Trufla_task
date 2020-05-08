@@ -11,11 +11,20 @@ export const UL = styled.ul`
   margin: 0;
   padding: 0;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const LI = styled.li`
   margin: 0 5px;
+  @media (max-width: 768px) {
+    margin: 20px 0;
+  }
 `;
 
 export const NavLink = styled(Link)`
