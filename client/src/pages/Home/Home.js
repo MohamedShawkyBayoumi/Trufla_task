@@ -56,7 +56,7 @@ const Home = () => {
         
         if(!active){
             setShowLoadingBtn(true);
-            
+            setPerPage(5);
             let filteredProducts = products.length && products.filter((product) => {
                 let productsActive = product.promotions.length ? product.promotions.filter(p => p.active) : []
                 return productsActive.length &&  {
