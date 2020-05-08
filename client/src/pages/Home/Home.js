@@ -49,7 +49,6 @@ const Home = () => {
 
     const loadMore = () => {
         setPage(page + 1);
-        console.log(page);
     }
 
     const promotionFilter = () => {
