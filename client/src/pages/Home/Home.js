@@ -24,7 +24,7 @@ const Home = () => {
         try {
             setIsLoading(true);
             let res = await fetch_all_products(page, perPage);
-            if(!active || !isCancelled){
+            if(!active && !isCancelled){
                 setProducts(
                     page > 0 ? [...products, ...res] : res
                 )
