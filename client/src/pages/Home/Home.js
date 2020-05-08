@@ -96,7 +96,7 @@ const Home = () => {
     return (
         <HomeWrapper>
             {products.length > 0 && <Button active={active ? true : false} onClick={promotionFilter}>{active ? 'All Products' : 'Promotion filter'}</Button>}
-            <Input type='text' name='search' onChange={e => setSearchKeyword(e.target.value)} placeholder='Search by product name...' />
+            {products.length > 0 && <Input type='text' name='search' onChange={e => setSearchKeyword(e.target.value)} placeholder='Search by product name...' />}
 
             <InfiniteScroll
                 loadMore={loadMore}
