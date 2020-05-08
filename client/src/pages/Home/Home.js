@@ -24,13 +24,27 @@ const Home = () => {
         try {
             setIsLoading(true);
             let res = await fetch_all_products(page, perPage);
-            if(!active && !isCancelled){
-                setProducts(
-                    page > 0 ? [...products, ...res] : res
-                )
+            if(!isCancelled){
+
+                if(!active){
+                    setProducts(
+                        page > 0 ? [...products, ...res] : res
+                    )
+                } else {
+                    setProducts(
+                        res
+                    )
+                }
                 res.length > 0 ? setShowLoadingBtn(false) : setShowLoadingBtn(true);
                 setIsLoading(false);
             }
+            // if(!active && !isCancelled){
+            //     setProducts(
+            //         page > 0 ? [...products, ...res] : res
+            //     )
+            //     res.length > 0 ? setShowLoadingBtn(false) : setShowLoadingBtn(true);
+            //     setIsLoading(false);
+            // }
 
         } catch (error) {
             if(!isCancelled){
