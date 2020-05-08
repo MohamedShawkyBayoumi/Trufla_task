@@ -100,6 +100,7 @@ const Home = () => {
 
             <InfiniteScroll
                 loadMore={loadMore}
+                products={products}
                 page={page}
                 showLoadingBtn={showLoadingBtn}
                 isLoading={isLoading}

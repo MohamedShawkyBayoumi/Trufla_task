@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Button } from '../pages/Home/HomeStyles';
 
-const InfiniteScroll = ({ children, loadMore, page, showLoadingBtn, isLoading }) => {
+const InfiniteScroll = ({ children, loadMore, page, showLoadingBtn, isLoading, products }) => {
 
   const loadingPoint = useRef(null);
 
@@ -24,7 +24,7 @@ const InfiniteScroll = ({ children, loadMore, page, showLoadingBtn, isLoading })
     <React.Fragment>
       {children}
       <div ref={loadingPoint}></div>
-      {!showLoadingBtn && (
+      {!showLoadingBtn && products.length > 0 && (
         <Button onClick={() => loadMore()}>Loading</Button>
       )}
     </React.Fragment>
