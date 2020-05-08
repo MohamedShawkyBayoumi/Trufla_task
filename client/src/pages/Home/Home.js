@@ -79,6 +79,7 @@ const Home = () => {
             setPerPage(5);
             setPage(0);
             setShowLoadingBtn(false);
+            setProducts([]);
             getProducts();
             setIsLoading(false);
         }
