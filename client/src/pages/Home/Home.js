@@ -63,14 +63,14 @@ const Home = () => {
         if(!active){
             setShowLoadingBtn(true);
             setPerPage(5);
-            let filteredProducts = products.length && products.filter((product) => {
-                let productsActive = product.promotions.length ? product.promotions.filter(p => p.active) : []
+            let filteredProducts = products && products.length > 0 && products.filter((product) => {
+                let productsActive = product.promotions.length > 0 ? product.promotions.filter(p => p.active) : []
                 return productsActive.length &&  {
                     _id: product._id,
                     name: product.name,
                     price: product.price,
                     department_name: product.department_name,
-                    promotions: product.promotions.length ? product.promotions.filter(p => p.active) : []
+                    promotions: product.promotions.length > 0 ? product.promotions.filter(p => p.active) : []
                 }
             });
     
@@ -95,7 +95,7 @@ const Home = () => {
 
     return (
         <HomeWrapper>
-            <Button active={active ? true : false} onClick={promotionFilter}>{active ? 'All Products' : 'Promotion filter'}</Button>
+            {products.length > 0 && <Button active={active ? true : false} onClick={promotionFilter}>{active ? 'All Products' : 'Promotion filter'}</Button>}
             <Input type='text' name='search' onChange={e => setSearchKeyword(e.target.value)} placeholder='Search by product name...' />
 
             <InfiniteScroll
