@@ -49,6 +49,7 @@ const Home = () => {
 
     const loadMore = () => {
         setPage(page + 1);
+        console.log(page);
     }
 
     const promotionFilter = () => {
@@ -75,7 +76,6 @@ const Home = () => {
             setPage(0);
             setShowLoadingBtn(false);
             getProducts();
-            setActive(false);
         }
     }
 
