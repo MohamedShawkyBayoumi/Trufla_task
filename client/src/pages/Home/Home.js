@@ -38,14 +38,6 @@ const Home = () => {
                 res.length > 0 ? setShowLoadingBtn(false) : setShowLoadingBtn(true);
                 setIsLoading(false);
             }
-            // if(!active && !isCancelled){
-            //     setProducts(
-            //         page > 0 ? [...products, ...res] : res
-            //     )
-            //     res.length > 0 ? setShowLoadingBtn(false) : setShowLoadingBtn(true);
-            //     setIsLoading(false);
-            // }
-
         } catch (error) {
             if(!isCancelled){
                 setIsLoading(false);
