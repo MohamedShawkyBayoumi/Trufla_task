@@ -55,7 +55,6 @@ const Home = () => {
         setActive(!active);
         
         if(!active){
-            setPerPage(5);
             setShowLoadingBtn(true);
             
             let filteredProducts = products.length && products.filter((product) => {
@@ -75,6 +74,7 @@ const Home = () => {
             setPage(0);
             setShowLoadingBtn(false);
             getProducts();
+            setIsLoading(false);
         }
     }
 
